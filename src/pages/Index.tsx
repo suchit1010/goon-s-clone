@@ -1,12 +1,35 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useEffect } from 'react';
+import { gsap } from 'gsap';
+import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import Header from '@/components/Header';
+import Hero from '@/components/Hero';
+import Mission from '@/components/Mission';
+import Works from '@/components/Works';
+import Workflow from '@/components/Workflow';
+import Footer from '@/components/Footer';
+
+gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
+  useEffect(() => {
+    // Refresh ScrollTrigger after all content loads
+    ScrollTrigger.refresh();
+    
+    return () => {
+      ScrollTrigger.getAll().forEach(trigger => trigger.kill());
+    };
+  }, []);
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="bg-background min-h-screen">
+      <Header />
+      <main>
+        <Hero />
+        <Mission />
+        <Works />
+        <Workflow />
+      </main>
+      <Footer />
     </div>
   );
 };
