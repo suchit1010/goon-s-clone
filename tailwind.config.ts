@@ -15,15 +15,16 @@ export default {
     extend: {
       fontFamily: {
         sans: ['Inter', '-apple-system', 'BlinkMacSystemFont', 'Segoe UI', 'Roboto', 'sans-serif'],
-        display: ['Inter', 'sans-serif'],
+        display: ['Clash Display', 'Inter', 'sans-serif'],
       },
       colors: {
-        goons: {
-          blue: "hsl(var(--goons-blue))",
-          dark: "hsl(var(--goons-dark))",
-          darker: "hsl(var(--goons-darker))",
-          gray: "hsl(var(--goons-gray))",
-          "light-gray": "hsl(var(--goons-light-gray))",
+        superteam: {
+          yellow: "hsl(var(--st-yellow))",
+          beige: "hsl(var(--st-beige))",
+          "mid-green": "hsl(var(--st-mid-green))",
+          "teal-green": "hsl(var(--st-teal-green))",
+          dark: "hsl(var(--st-dark))",
+          darker: "hsl(var(--st-darker))",
         },
         border: "hsl(var(--border))",
         input: "hsl(var(--input))",
@@ -107,6 +108,14 @@ export default {
           "0%": { transform: "scale(0.9)", opacity: "0" },
           "100%": { transform: "scale(1)", opacity: "1" },
         },
+        "fly-in": {
+          "0%": { transform: "translateX(-100%) translateY(50%) scale(0.5)", opacity: "0" },
+          "100%": { transform: "translateX(0) translateY(0) scale(1)", opacity: "1" },
+        },
+        "counter": {
+          "0%": { transform: "translateY(100%)" },
+          "100%": { transform: "translateY(0)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -117,6 +126,7 @@ export default {
         "slide-up": "slide-up 0.6s ease-out",
         "fade-in-up": "fade-in-up 0.8s ease-out",
         "scale-in": "scale-in 0.5s ease-out",
+        "fly-in": "fly-in 1s cubic-bezier(0.34, 1.56, 0.64, 1)",
       },
     },
   },
