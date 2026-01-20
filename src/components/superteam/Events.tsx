@@ -1,7 +1,7 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import { Calendar, MapPin, ArrowRight } from 'lucide-react';
+import { Calendar, MapPin, ArrowRight, Users } from 'lucide-react';
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -54,45 +54,75 @@ const Events = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Title animation
       gsap.fromTo('.events-title', 
-        { y: 40, opacity: 0 },
+        { y: 80, opacity: 0 },
         { 
           y: 0, 
           opacity: 1, 
-          duration: 0.8, 
+          duration: 1, 
           ease: "power3.out",
           scrollTrigger: {
             trigger: '.events-title',
-            start: 'top 80%',
-          }
-        }
-      );
-
-      gsap.fromTo('.event-card', 
-        { y: 50, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          duration: 0.6, 
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: '.event-card',
             start: 'top 85%',
           }
         }
       );
 
-      gsap.fromTo('.past-event', 
-        { x: -30, opacity: 0 },
+      // Event cards with 3D tilt effect
+      gsap.utils.toArray('.event-card').forEach((card: any, i) => {
+        gsap.fromTo(card, 
+          { 
+            y: 100, 
+            opacity: 0, 
+            rotateX: 10,
+            transformPerspective: 1000,
+          },
+          { 
+            y: 0, 
+            opacity: 1, 
+            rotateX: 0,
+            duration: 0.8, 
+            delay: i * 0.15,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+            }
+          }
+        );
+      });
+
+      // Past events slide in from left
+      gsap.utils.toArray('.past-event').forEach((card: any, i) => {
+        gsap.fromTo(card, 
+          { x: -80, opacity: 0, scale: 0.9 },
+          { 
+            x: 0, 
+            opacity: 1, 
+            scale: 1,
+            duration: 0.6, 
+            delay: i * 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 90%',
+            }
+          }
+        );
+      });
+
+      // Section heading columns
+      gsap.fromTo('.events-col-title', 
+        { x: -40, opacity: 0 },
         { 
           x: 0, 
           opacity: 1, 
-          duration: 0.5, 
-          stagger: 0.1,
+          duration: 0.8, 
+          stagger: 0.2,
           ease: "power3.out",
           scrollTrigger: {
-            trigger: '.past-event',
+            trigger: '.events-col-title',
             start: 'top 85%',
           }
         }
@@ -103,45 +133,52 @@ const Events = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="events" className="py-24 lg:py-32 relative">
-      <div className="container mx-auto px-6">
-        <h2 className="events-title text-4xl md:text-5xl font-bold text-center mb-16">
+    <section ref={sectionRef} id="events" className="py-28 lg:py-40 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/3 rounded-full blur-3xl" />
+      
+      <div className="container mx-auto px-6 relative z-10">
+        <h2 className="events-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-20">
           <span className="text-primary">Events</span> & Meetups
         </h2>
 
-        <div className="grid lg:grid-cols-2 gap-12">
+        <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Upcoming Events */}
           <div>
-            <h3 className="text-2xl font-bold mb-6 flex items-center gap-2">
-              <Calendar className="w-6 h-6 text-primary" />
+            <h3 className="events-col-title text-2xl font-bold mb-8 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+                <Calendar className="w-5 h-5 text-primary" />
+              </div>
               Upcoming
             </h3>
-            <div className="space-y-4">
-              {upcomingEvents.map((event) => (
+            <div className="space-y-5">
+              {upcomingEvents.map((event, index) => (
                 <div 
                   key={event.title}
-                  className="event-card p-6 rounded-2xl bg-card border border-border hover:border-primary/50 transition-all duration-300 group cursor-pointer card-hover"
+                  className="event-card p-6 lg:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-500 group cursor-pointer hover:shadow-xl hover:shadow-primary/5"
                 >
                   <div className="flex items-start justify-between gap-4">
-                    <div>
-                      <span className="text-xs font-semibold text-primary uppercase tracking-wider">
+                    <div className="flex-1">
+                      <span className="inline-block text-xs font-semibold text-primary uppercase tracking-wider bg-primary/10 px-3 py-1 rounded-full mb-3">
                         {event.type}
                       </span>
-                      <h4 className="text-lg font-bold mt-1 group-hover:text-primary transition-colors">
+                      <h4 className="text-lg lg:text-xl font-bold group-hover:text-primary transition-colors duration-300">
                         {event.title}
                       </h4>
-                      <div className="flex items-center gap-4 mt-3 text-sm text-muted-foreground">
-                        <span className="flex items-center gap-1">
-                          <Calendar className="w-4 h-4" />
+                      <div className="flex flex-wrap items-center gap-4 mt-4 text-sm text-muted-foreground">
+                        <span className="flex items-center gap-1.5">
+                          <Calendar className="w-4 h-4 text-primary/70" />
                           {event.date}
                         </span>
-                        <span className="flex items-center gap-1">
-                          <MapPin className="w-4 h-4" />
+                        <span className="flex items-center gap-1.5">
+                          <MapPin className="w-4 h-4 text-primary/70" />
                           {event.location}
                         </span>
                       </div>
                     </div>
-                    <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary group-hover:translate-x-1 transition-all" />
+                    <div className="w-12 h-12 rounded-full bg-muted flex items-center justify-center group-hover:bg-primary transition-colors duration-300">
+                      <ArrowRight className="w-5 h-5 text-muted-foreground group-hover:text-primary-foreground group-hover:translate-x-1 transition-all duration-300" />
+                    </div>
                   </div>
                 </div>
               ))}
@@ -151,7 +188,7 @@ const Events = () => {
               href="https://lu.ma/Superteambrasil" 
               target="_blank" 
               rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 mt-6 text-primary font-semibold hover:underline"
+              className="inline-flex items-center gap-2 mt-8 text-primary font-semibold hover:gap-3 transition-all duration-300"
             >
               View All Events <ArrowRight className="w-4 h-4" />
             </a>
@@ -159,16 +196,25 @@ const Events = () => {
 
           {/* Past Events */}
           <div>
-            <h3 className="text-2xl font-bold mb-6">Past Events</h3>
+            <h3 className="events-col-title text-2xl font-bold mb-8 flex items-center gap-3">
+              <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
+                <Users className="w-5 h-5 text-muted-foreground" />
+              </div>
+              Past Events
+            </h3>
             <div className="grid grid-cols-2 gap-4">
-              {pastEvents.map((event) => (
+              {pastEvents.map((event, index) => (
                 <div 
                   key={event.title}
-                  className="past-event p-5 rounded-xl bg-muted/50 border border-border"
+                  className="past-event p-6 rounded-2xl bg-muted/50 border border-border hover:border-primary/30 transition-all duration-300 group"
                 >
-                  <h4 className="font-semibold text-sm mb-2">{event.title}</h4>
-                  <p className="text-xs text-muted-foreground mb-1">{event.date}</p>
-                  <p className="text-xs text-primary">{event.attendees}+ attendees</p>
+                  <h4 className="font-semibold text-sm mb-3 group-hover:text-primary transition-colors">
+                    {event.title}
+                  </h4>
+                  <div className="flex items-center justify-between text-xs text-muted-foreground">
+                    <span>{event.date}</span>
+                    <span className="text-primary font-medium">{event.attendees}+ attendees</span>
+                  </div>
                 </div>
               ))}
             </div>

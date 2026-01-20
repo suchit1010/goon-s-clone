@@ -38,43 +38,61 @@ const FAQ = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Title animation
       gsap.fromTo('.faq-title', 
-        { y: 40, opacity: 0 },
+        { y: 80, opacity: 0 },
         { 
           y: 0, 
           opacity: 1, 
-          duration: 0.8, 
+          duration: 1, 
           ease: "power3.out",
           scrollTrigger: {
             trigger: '.faq-title',
-            start: 'top 80%',
-          }
-        }
-      );
-
-      gsap.fromTo('.faq-item', 
-        { y: 30, opacity: 0 },
-        { 
-          y: 0, 
-          opacity: 1, 
-          duration: 0.5, 
-          stagger: 0.1,
-          ease: "power3.out",
-          scrollTrigger: {
-            trigger: '.faq-item',
             start: 'top 85%',
           }
         }
       );
+
+      // FAQ items with staggered reveal
+      gsap.utils.toArray('.faq-item').forEach((item: any, i) => {
+        gsap.fromTo(item, 
+          { y: 60, opacity: 0, scale: 0.98 },
+          { 
+            y: 0, 
+            opacity: 1, 
+            scale: 1,
+            duration: 0.7, 
+            delay: i * 0.1,
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: item,
+              start: 'top 90%',
+            }
+          }
+        );
+      });
+
+      // Hover animation for FAQ items
+      gsap.utils.toArray('.faq-item').forEach((item: any) => {
+        item.addEventListener('mouseenter', () => {
+          gsap.to(item, { x: 10, duration: 0.3, ease: "power2.out" });
+        });
+        item.addEventListener('mouseleave', () => {
+          gsap.to(item, { x: 0, duration: 0.3, ease: "power2.out" });
+        });
+      });
     }, sectionRef);
 
     return () => ctx.revert();
   }, []);
 
   return (
-    <section ref={sectionRef} id="faq" className="py-24 lg:py-32 relative">
-      <div className="container mx-auto px-6 max-w-3xl">
-        <h2 className="faq-title text-4xl md:text-5xl font-bold text-center mb-16">
+    <section ref={sectionRef} id="faq" className="py-28 lg:py-40 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-3xl -translate-y-1/2" />
+      
+      <div className="container mx-auto px-6 max-w-3xl relative z-10">
+        <h2 className="faq-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-16">
           Frequently Asked <span className="text-primary">Questions</span>
         </h2>
 
@@ -83,12 +101,12 @@ const FAQ = () => {
             <AccordionItem 
               key={index} 
               value={`item-${index}`}
-              className="faq-item bg-card border border-border rounded-xl px-6 data-[state=open]:border-primary/50"
+              className="faq-item bg-card border border-border rounded-2xl px-6 lg:px-8 data-[state=open]:border-primary/50 transition-all duration-300 hover:shadow-lg"
             >
-              <AccordionTrigger className="text-left text-lg font-semibold hover:text-primary transition-colors py-5">
+              <AccordionTrigger className="text-left text-lg lg:text-xl font-semibold hover:text-primary transition-colors py-6 hover:no-underline">
                 {faq.question}
               </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-5 leading-relaxed">
+              <AccordionContent className="text-muted-foreground pb-6 text-base lg:text-lg leading-relaxed">
                 {faq.answer}
               </AccordionContent>
             </AccordionItem>

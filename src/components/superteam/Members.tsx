@@ -87,7 +87,23 @@ const Members = () => {
 
   useEffect(() => {
     const ctx = gsap.context(() => {
+      // Title animation
       gsap.fromTo('.members-title', 
+        { y: 80, opacity: 0 },
+        { 
+          y: 0, 
+          opacity: 1, 
+          duration: 1, 
+          ease: "power3.out",
+          scrollTrigger: {
+            trigger: '.members-title',
+            start: 'top 85%',
+          }
+        }
+      );
+
+      // Subtitle
+      gsap.fromTo('.members-subtitle', 
         { y: 40, opacity: 0 },
         { 
           y: 0, 
@@ -95,27 +111,75 @@ const Members = () => {
           duration: 0.8, 
           ease: "power3.out",
           scrollTrigger: {
-            trigger: '.members-title',
-            start: 'top 80%',
+            trigger: '.members-subtitle',
+            start: 'top 90%',
           }
         }
       );
 
-      gsap.fromTo('.member-card', 
-        { y: 50, opacity: 0, scale: 0.95 },
+      // Filter pills animation
+      gsap.fromTo('.filter-pill', 
+        { y: 30, opacity: 0, scale: 0.9 },
         { 
           y: 0, 
           opacity: 1, 
           scale: 1,
           duration: 0.5, 
           stagger: 0.08,
-          ease: "power3.out",
+          ease: "back.out(1.7)",
           scrollTrigger: {
-            trigger: '.member-card',
-            start: 'top 85%',
+            trigger: '.filter-pill',
+            start: 'top 90%',
           }
         }
       );
+
+      // Member cards with staggered reveal
+      gsap.utils.toArray('.member-card').forEach((card: any, i) => {
+        const row = Math.floor(i / 4);
+        const col = i % 4;
+        
+        gsap.fromTo(card, 
+          { 
+            y: 100, 
+            opacity: 0, 
+            scale: 0.9,
+            rotateY: col < 2 ? -10 : 10,
+          },
+          { 
+            y: 0, 
+            opacity: 1, 
+            scale: 1,
+            rotateY: 0,
+            duration: 0.8, 
+            delay: (row * 0.1) + (col * 0.08),
+            ease: "power3.out",
+            scrollTrigger: {
+              trigger: card,
+              start: 'top 95%',
+            }
+          }
+        );
+      });
+
+      // Magnetic effect on member cards
+      gsap.utils.toArray('.member-card').forEach((card: any) => {
+        const xTo = gsap.quickTo(card, "x", { duration: 0.6, ease: "power3" });
+        const yTo = gsap.quickTo(card, "y", { duration: 0.6, ease: "power3" });
+
+        card.addEventListener('mousemove', (e: MouseEvent) => {
+          const rect = card.getBoundingClientRect();
+          const x = e.clientX - rect.left - rect.width / 2;
+          const y = e.clientY - rect.top - rect.height / 2;
+          xTo(x * 0.1);
+          yTo(y * 0.1);
+        });
+
+        card.addEventListener('mouseleave', () => {
+          xTo(0);
+          yTo(0);
+        });
+      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -125,25 +189,31 @@ const Members = () => {
   const sortedMembers = [...members].sort((a, b) => (b.isCore ? 1 : 0) - (a.isCore ? 1 : 0));
 
   return (
-    <section ref={sectionRef} id="members" className="py-24 lg:py-32 bg-card/50 relative">
-      <div className="container mx-auto px-6">
-        <h2 className="members-title text-4xl md:text-5xl font-bold text-center mb-6">
+    <section ref={sectionRef} id="members" className="py-28 lg:py-40 bg-card/50 relative overflow-hidden">
+      {/* Background */}
+      <div className="absolute top-0 left-0 w-full h-full">
+        <div className="absolute top-20 right-20 w-[400px] h-[400px] bg-primary/3 rounded-full blur-3xl" />
+        <div className="absolute bottom-20 left-20 w-[300px] h-[300px] bg-accent/3 rounded-full blur-3xl" />
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
+        <h2 className="members-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
           Meet the <span className="text-primary">Builders</span>
         </h2>
-        <p className="members-title text-muted-foreground text-center mb-12 max-w-2xl mx-auto">
+        <p className="members-subtitle text-muted-foreground text-center mb-12 max-w-2xl mx-auto text-lg">
           Our community is made up of talented developers, designers, creators, and founders 
           building the future of Web3 in Brazil.
         </p>
 
         {/* Filters */}
-        <div className="flex flex-wrap justify-center gap-2 mb-12">
-          {skillFilters.map((filter) => (
+        <div className="flex flex-wrap justify-center gap-3 mb-16">
+          {skillFilters.map((filter, index) => (
             <button 
               key={filter}
-              className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
+              className={`filter-pill px-5 py-2.5 rounded-full text-sm font-medium transition-all duration-300 ${
                 filter === 'All' 
-                  ? 'bg-primary text-primary-foreground' 
-                  : 'bg-muted text-muted-foreground hover:bg-muted/80'
+                  ? 'bg-primary text-primary-foreground shadow-lg shadow-primary/20' 
+                  : 'bg-muted text-muted-foreground hover:bg-muted/80 hover:text-foreground'
               }`}
             >
               {filter}
@@ -156,26 +226,34 @@ const Members = () => {
           {sortedMembers.map((member) => (
             <div 
               key={member.name}
-              className={`member-card group p-6 rounded-2xl border transition-all duration-300 card-hover ${
+              className={`member-card group p-6 rounded-3xl border transition-all duration-500 cursor-pointer hover:shadow-2xl ${
                 member.isCore 
-                  ? 'bg-primary/5 border-primary/30' 
+                  ? 'bg-gradient-to-br from-primary/10 to-primary/5 border-primary/30 hover:border-primary/50' 
                   : 'bg-card border-border hover:border-primary/30'
               }`}
+              style={{ transformStyle: 'preserve-3d' }}
             >
               {member.isCore && (
-                <span className="text-xs font-semibold text-primary uppercase tracking-wider mb-2 block">
+                <span className="inline-block text-xs font-semibold text-primary uppercase tracking-wider bg-primary/10 px-3 py-1 rounded-full mb-4">
                   Core Team
                 </span>
               )}
               
               <div className="flex items-center gap-4 mb-4">
-                <img 
-                  src={member.avatar} 
-                  alt={member.name}
-                  className="w-14 h-14 rounded-full bg-muted"
-                />
+                <div className="relative">
+                  <img 
+                    src={member.avatar} 
+                    alt={member.name}
+                    className="w-16 h-16 rounded-full bg-muted ring-2 ring-transparent group-hover:ring-primary/50 transition-all duration-300"
+                  />
+                  {member.isCore && (
+                    <div className="absolute -bottom-1 -right-1 w-5 h-5 bg-primary rounded-full flex items-center justify-center">
+                      <span className="text-xs">⭐</span>
+                    </div>
+                  )}
+                </div>
                 <div>
-                  <h4 className="font-bold group-hover:text-primary transition-colors">
+                  <h4 className="font-bold text-lg group-hover:text-primary transition-colors duration-300">
                     {member.name}
                   </h4>
                   <a 
@@ -190,13 +268,13 @@ const Members = () => {
               </div>
 
               <p className="text-sm text-muted-foreground mb-1">{member.role}</p>
-              <p className="text-sm font-medium text-foreground mb-4">{member.company}</p>
+              <p className="text-sm font-medium text-foreground mb-5">{member.company}</p>
 
-              <div className="flex flex-wrap gap-1.5">
+              <div className="flex flex-wrap gap-2">
                 {member.skills.map((skill) => (
                   <span 
                     key={skill}
-                    className="px-2.5 py-1 text-xs rounded-full bg-muted text-muted-foreground"
+                    className="px-3 py-1 text-xs rounded-full bg-muted text-muted-foreground"
                   >
                     {skill}
                   </span>
@@ -204,26 +282,27 @@ const Members = () => {
               </div>
 
               {/* Twitter hover reveal */}
-              <div className="mt-4 opacity-0 group-hover:opacity-100 transition-opacity">
+              <div className="mt-5 pt-5 border-t border-border opacity-0 group-hover:opacity-100 transition-all duration-300 transform translate-y-2 group-hover:translate-y-0">
                 <a 
                   href={`https://twitter.com/${member.handle.slice(1)}`}
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="flex items-center gap-2 text-sm text-primary"
+                  className="flex items-center gap-2 text-sm text-primary font-medium"
                 >
-                  <Twitter className="w-4 h-4" /> Follow
+                  <Twitter className="w-4 h-4" /> Follow on X
                 </a>
               </div>
             </div>
           ))}
         </div>
 
-        <div className="text-center mt-12">
+        <div className="text-center mt-16">
           <a 
             href="/members"
-            className="inline-flex items-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all duration-300 hover:scale-105"
+            className="group inline-flex items-center gap-3 px-10 py-5 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-primary/20"
           >
-            View All Members <ArrowRight className="w-5 h-5" />
+            View All Members 
+            <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
           </a>
         </div>
       </div>

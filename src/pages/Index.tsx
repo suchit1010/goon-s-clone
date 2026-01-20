@@ -1,6 +1,7 @@
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import useSmoothScroll from '@/hooks/use-smooth-scroll';
 import Header from '@/components/superteam/Header';
 import Hero from '@/components/superteam/Hero';
 import Mission from '@/components/superteam/Mission';
@@ -15,10 +16,17 @@ import Footer from '@/components/superteam/Footer';
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
+  // Enable smooth scrolling with Lenis
+  useSmoothScroll();
+
   useEffect(() => {
-    ScrollTrigger.refresh();
+    // Refresh ScrollTrigger after layout
+    const timeout = setTimeout(() => {
+      ScrollTrigger.refresh();
+    }, 100);
     
     return () => {
+      clearTimeout(timeout);
       ScrollTrigger.getAll().forEach(trigger => trigger.kill());
     };
   }, []);
