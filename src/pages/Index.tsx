@@ -1,18 +1,21 @@
 import { useEffect } from 'react';
 import { gsap } from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
-import Header from '@/components/Header';
-import Hero from '@/components/Hero';
-import Mission from '@/components/Mission';
-import Works from '@/components/Works';
-import Workflow from '@/components/Workflow';
-import Footer from '@/components/Footer';
+import Header from '@/components/superteam/Header';
+import Hero from '@/components/superteam/Hero';
+import Mission from '@/components/superteam/Mission';
+import Stats from '@/components/superteam/Stats';
+import Events from '@/components/superteam/Events';
+import Members from '@/components/superteam/Members';
+import Partners from '@/components/superteam/Partners';
+import FAQ from '@/components/superteam/FAQ';
+import JoinCTA from '@/components/superteam/JoinCTA';
+import Footer from '@/components/superteam/Footer';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const Index = () => {
   useEffect(() => {
-    // Refresh ScrollTrigger after all content loads
     ScrollTrigger.refresh();
     
     return () => {
@@ -26,8 +29,12 @@ const Index = () => {
       <main>
         <Hero />
         <Mission />
-        <Works />
-        <Workflow />
+        <Stats />
+        <Events />
+        <Members />
+        <Partners />
+        <FAQ />
+        <JoinCTA />
       </main>
       <Footer />
     </div>
