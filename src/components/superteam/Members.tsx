@@ -9,11 +9,38 @@ const members = [
   {
     name: 'Lucas Britto',
     handle: '@lucastobritto',
-    role: 'VC & M&A Executive',
-    company: 'VitalFi',
-    skills: ['RWA', 'DeFi', 'Strategy'],
+    role: 'CEO @Credit_Markets',
+    company: 'Credit Markets',
+    skills: ['Governance', 'VC', 'Strategy'],
     isCore: true,
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=lucas',
+  },
+  {
+    name: 'Rodrigo Trindade',
+    handle: '@r0dtr',
+    role: 'CSO @Credit_Markets',
+    company: 'Credit Markets',
+    skills: ['Fintech', 'Blockchain', 'Strategy'],
+    isCore: true,
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=rodrigo',
+  },
+  {
+    name: 'Bruna Uchôa',
+    handle: '@brunauchoa',
+    role: 'Founder @HODL21official',
+    company: 'HODL21',
+    skills: ['Community', 'Web3 Marketing', 'Ambassador'],
+    isCore: true,
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=bruna',
+  },
+  {
+    name: 'Victor Cioffi',
+    handle: '@victorcioffi',
+    role: 'Community Lead',
+    company: 'Ex-Head Superteam Brazil',
+    skills: ['Ecosystem Growth', 'Events', 'BD'],
+    isCore: true,
+    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=victor',
   },
   {
     name: 'Ana Silva',
@@ -21,7 +48,7 @@ const members = [
     role: 'Smart Contract Dev',
     company: 'Solana Labs',
     skills: ['Rust', 'Anchor', 'TypeScript'],
-    isCore: true,
+    isCore: false,
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=ana',
   },
   {
@@ -32,33 +59,6 @@ const members = [
     skills: ['UI/UX', 'Web3', 'Figma'],
     isCore: false,
     avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=pedro',
-  },
-  {
-    name: 'Maria Costa',
-    handle: '@mariacosta',
-    role: 'Community Lead',
-    company: 'Superteam',
-    skills: ['Growth', 'Events', 'Content'],
-    isCore: true,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=maria',
-  },
-  {
-    name: 'João Oliveira',
-    handle: '@joaooliveira',
-    role: 'Full Stack Developer',
-    company: 'Magic Eden',
-    skills: ['React', 'Node.js', 'Solana'],
-    isCore: false,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=joao',
-  },
-  {
-    name: 'Fernanda Lima',
-    handle: '@fernandalima',
-    role: 'Marketing Lead',
-    company: 'Jupiter',
-    skills: ['Marketing', 'Strategy', 'BD'],
-    isCore: false,
-    avatar: 'https://api.dicebear.com/7.x/avataaars/svg?seed=fernanda',
   },
   {
     name: 'Carlos Mendes',
@@ -80,7 +80,7 @@ const members = [
   },
 ];
 
-const skillFilters = ['All', 'Dev', 'Design', 'Content', 'Growth', 'DeFi'];
+const skillFilters = ['All', 'Core Team', 'Rust', 'Frontend', 'Design', 'Content', 'Growth'];
 
 const Members = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -198,11 +198,10 @@ const Members = () => {
 
       <div className="container mx-auto px-6 relative z-10">
         <h2 className="members-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
-          Meet the <span className="text-primary">Builders</span>
+          Our Members: The <span className="text-primary">Builders</span> of the Future
         </h2>
         <p className="members-subtitle text-muted-foreground text-center mb-12 max-w-2xl mx-auto text-lg">
-          Our community is made up of talented developers, designers, creators, and founders 
-          building the future of Web3 in Brazil.
+          Meet the talents shaping Solana in Brazil. Connect with innovators driving the ecosystem forward.
         </p>
 
         {/* Filters */}

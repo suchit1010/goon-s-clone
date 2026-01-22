@@ -6,13 +6,14 @@ const Footer = () => {
 
   const quickLinks = [
     { label: 'Events', href: 'https://lu.ma/Superteambrasil' },
-    { label: 'Earn', href: 'https://earn.superteam.fun' },
     { label: 'Members', href: '#members' },
+    { label: 'Earn', href: 'https://earn.superteam.fun/s/superteambr' },
+    { label: 'Grants', href: 'https://earn.superteam.fun' },
     { label: 'FAQ', href: '#faq' },
   ];
 
   const socialLinks = [
-    { label: 'Twitter', href: 'https://twitter.com/SuperteamBR' },
+    { label: 'Twitter/X', href: 'https://twitter.com/SuperteamBR' },
     { label: 'Telegram', href: 'https://t.me/superteambr' },
     { label: 'Discord', href: 'https://discord.gg/superteambr' },
     { label: 'LinkedIn', href: 'https://linkedin.com/company/superteambr' },

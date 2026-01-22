@@ -8,33 +8,33 @@ gsap.registerPlugin(ScrollTrigger);
 const pillars = [
   {
     icon: Users,
-    title: 'Builder Support',
-    description: 'Mentorship and guidance from experienced Solana builders and founders.',
+    title: 'Builder Support & Mentorship',
+    description: 'Personalized guidance for developers and founders, including coaching for 150+ teams in global hackathons.',
   },
   {
     icon: Calendar,
-    title: 'Events',
-    description: 'Regular meetups, hackathons, and workshops across Brazil.',
+    title: 'Event Programming',
+    description: 'Roadshows covering 8,000+ km, bootcamps in Greece, and Solana Hotel in Buenos Aires—9 events in 2024 with 20,000+ engagements.',
   },
   {
     icon: Coins,
-    title: 'Grants & Funding',
-    description: 'Access to grants and funding opportunities for your projects.',
+    title: 'Grants & Funding Access',
+    description: 'Up to $10K in grants from the Solana Foundation via Superteam Earn, with $66.5K approved so far.',
   },
   {
     icon: Briefcase,
-    title: 'Bounties & Jobs',
-    description: 'Earn by completing bounties or find your next role in Web3.',
+    title: 'Job/Bounty Opportunities',
+    description: 'Platform for bounties and freelance gigs, connecting Brazilian talent to global Solana projects.',
   },
   {
     icon: GraduationCap,
-    title: 'Education',
-    description: 'Learn Solana development through our workshops and resources.',
+    title: 'Education & Workshops',
+    description: 'Bootcamps and hands-on sessions for dev onboarding, focusing on DeFi, games, and infrastructure.',
   },
   {
     icon: Network,
-    title: 'Network',
-    description: 'Connect with the best talent in the Brazilian Web3 ecosystem.',
+    title: 'Network Connections',
+    description: 'Partnerships with VCs, angels, and the LATAM ecosystem for fundraising and collaborations.',
   },
 ];
 
@@ -124,13 +124,15 @@ const Mission = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div ref={headingRef} className="text-center mb-20">
           <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6 overflow-hidden">
-            <span className="mission-heading-word inline-block text-primary">What</span>{' '}
-            <span className="mission-heading-word inline-block">We</span>{' '}
-            <span className="mission-heading-word inline-block">Do</span>
+            <span className="mission-heading-word inline-block text-foreground">Our</span>{' '}
+            <span className="mission-heading-word inline-block text-primary">Mission:</span>{' '}
+            <span className="mission-heading-word inline-block text-foreground">Accelerating</span>{' '}
+            <span className="mission-heading-word inline-block text-foreground">Solana</span>{' '}
+            <span className="mission-heading-word inline-block text-foreground">in</span>{' '}
+            <span className="mission-heading-word inline-block text-foreground">Brazil</span>
           </h2>
-          <p className="mission-subtitle text-lg lg:text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-            Superteam Brasil empowers the next generation of Solana builders with resources, 
-            community, and opportunities to succeed.
+          <p className="mission-subtitle text-lg lg:text-xl text-muted-foreground max-w-3xl mx-auto leading-relaxed">
+            Launched in 2024, Superteam Brazil is transforming the Brazilian Web3 landscape with national roadshows, international bootcamps, and record-breaking hackathons. We're part of the global Superteam network, spanning 16 countries, with a community GDP of $9M+.
           </p>
         </div>
 

@@ -83,10 +83,10 @@ const JoinCTA = () => {
       <div className="container mx-auto px-6 relative z-10">
         <div className="text-center max-w-4xl mx-auto">
           <h2 className="cta-headline text-4xl md:text-5xl lg:text-7xl font-bold text-primary-foreground mb-8">
-            Join the Movement
+            Join Now and Build the Future
           </h2>
           <p className="cta-subtitle text-xl lg:text-2xl text-primary-foreground/80 mb-12 max-w-2xl mx-auto leading-relaxed">
-            Connect with the best Solana builders in Brazil. Learn, earn, and grow together.
+            Be part of the Solana revolution in Brazil. Connect with thousands of builders and access exclusive opportunities.
           </p>
 
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
