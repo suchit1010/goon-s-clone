@@ -196,11 +196,11 @@ const Hero = () => {
               ref={titleRef}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight"
             >
-              <span className="text-foreground">We lead Solana's</span>
+              <span className="text-foreground">Building Solana's</span>
               <br />
-              <span className="text-foreground">growth in </span>
+              <span className="text-foreground">Future in </span>
               <span className="text-primary relative">
-                Brasil
+                Brazil
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
                   <path d="M2 8 Q50 2 100 6 T198 4" stroke="hsl(var(--primary))" strokeWidth="3" strokeLinecap="round" className="opacity-50"/>
                 </svg>
@@ -211,7 +211,7 @@ const Hero = () => {
               ref={subtitleRef}
               className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
             >
-              We help local talent to work on Solana, founders to fly, startups and creatives to produce video & content for global companies.
+              Join the leading community of builders, founders, and investors in Latin America's largest Web3 ecosystem. Learn, build, and earn with Superteam Brazil.
             </p>
 
             {/* CTAs */}
@@ -238,16 +238,16 @@ const Hero = () => {
             {/* Quick stats */}
             <div className="flex flex-wrap gap-8 pt-8 border-t border-border/50">
               <div className="hero-stat">
-                <div className="text-3xl font-bold text-primary">200+</div>
-                <div className="text-sm text-muted-foreground">Active Members</div>
+                <div className="text-3xl font-bold text-primary">20K+</div>
+                <div className="text-sm text-muted-foreground">Participants Engaged</div>
               </div>
               <div className="hero-stat">
-                <div className="text-3xl font-bold text-accent">$500K+</div>
-                <div className="text-sm text-muted-foreground">Earned by Members</div>
+                <div className="text-3xl font-bold text-accent">$66.5K+</div>
+                <div className="text-sm text-muted-foreground">Grants Approved</div>
               </div>
               <div className="hero-stat">
-                <div className="text-3xl font-bold text-secondary">50+</div>
-                <div className="text-sm text-muted-foreground">Events Hosted</div>
+                <div className="text-3xl font-bold text-secondary">9</div>
+                <div className="text-sm text-muted-foreground">Events in 2024</div>
               </div>
             </div>
           </div>
@@ -320,19 +320,6 @@ const Hero = () => {
             {/* Decorative elements */}
             <div className="absolute top-[100px] left-[200px] w-16 h-16 rounded-full bg-primary/20 blur-xl" />
             <div className="absolute bottom-[150px] right-[180px] w-24 h-24 rounded-full bg-accent/20 blur-xl" />
-            
-            {/* Floating badge */}
-            <div className="hero-image absolute top-[220px] right-[280px] lg:right-[320px] bg-card border border-border rounded-xl px-4 py-3 shadow-xl z-40">
-              <div className="flex items-center gap-2">
-                <div className="w-8 h-8 rounded-full bg-accent/20 flex items-center justify-center">
-                  <span className="text-lg">🚀</span>
-                </div>
-                <div>
-                  <div className="text-xs text-muted-foreground">Recently</div>
-                  <div className="text-sm font-semibold">+15 new members</div>
-                </div>
-              </div>
-            </div>
           </div>
         </div>
       </div>
