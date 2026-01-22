@@ -7,45 +7,52 @@ gsap.registerPlugin(ScrollTrigger);
 
 const upcomingEvents = [
   {
-    title: 'Solana Builder Meetup SP',
-    date: 'Feb 15, 2026',
-    location: 'São Paulo, SP',
-    type: 'Meetup',
-  },
-  {
-    title: 'Web3 Hackathon Brasil',
-    date: 'Mar 1-3, 2026',
-    location: 'Rio de Janeiro, RJ',
+    title: 'Privacy Hackathon',
+    date: 'Jan 2026',
+    location: 'Online + In-Person',
     type: 'Hackathon',
+    description: 'Powered by Solana, $2M+ in prizes with partners.',
   },
   {
-    title: 'DeFi Workshop',
-    date: 'Mar 20, 2026',
-    location: 'Online',
-    type: 'Workshop',
+    title: 'Solana Summer Brazil',
+    date: 'Feb 2026',
+    location: 'São Paulo, SP',
+    type: 'Event Series',
+    description: 'In-person/online events leading up to Carnival.',
+  },
+  {
+    title: 'Web3 Builder Bootcamp',
+    date: 'Mar 2026',
+    location: 'Rio de Janeiro, RJ',
+    type: 'Bootcamp',
+    description: 'Hands-on dev onboarding focusing on DeFi and games.',
   },
 ];
 
 const pastEvents = [
   {
-    title: 'Superteam Summit Brasil',
-    date: 'Dec 2025',
-    attendees: 200,
+    title: '2024 Roadshow',
+    date: '2024',
+    attendees: 20000,
+    highlight: '8,000km, 9 events',
   },
   {
-    title: 'Solana Hacker House',
-    date: 'Nov 2025',
+    title: 'Greece Bootcamp',
+    date: '2024',
     attendees: 150,
+    highlight: 'with IslandDAO',
   },
   {
-    title: 'NFT Art Exhibition',
-    date: 'Oct 2025',
-    attendees: 100,
+    title: 'Solana Hotel Buenos Aires',
+    date: '2024',
+    attendees: 200,
+    highlight: 'LATAM Summit',
   },
   {
-    title: 'Developer Bootcamp',
-    date: 'Sep 2025',
-    attendees: 80,
+    title: 'Breakpoint UAE',
+    date: '2024',
+    attendees: 300,
+    highlight: 'Brazilian records broken',
   },
 ];
 
@@ -138,9 +145,12 @@ const Events = () => {
       <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[800px] h-[800px] bg-primary/3 rounded-full blur-3xl" />
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="events-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-20">
-          <span className="text-primary">Events</span> & Meetups
+        <h2 className="events-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
+          Events That <span className="text-primary">Inspire</span> and Connect
         </h2>
+        <p className="text-muted-foreground text-center mb-20 max-w-2xl mx-auto text-lg">
+          Join meetups, hackathons, and bootcamps that propel your Solana journey.
+        </p>
 
         <div className="grid lg:grid-cols-2 gap-12 lg:gap-16">
           {/* Upcoming Events */}
@@ -165,6 +175,7 @@ const Events = () => {
                       <h4 className="text-lg lg:text-xl font-bold group-hover:text-primary transition-colors duration-300">
                         {event.title}
                       </h4>
+                      <p className="text-sm text-muted-foreground mt-2">{event.description}</p>
                       <div className="flex flex-wrap items-center gap-4 mt-4 text-sm text-muted-foreground">
                         <span className="flex items-center gap-1.5">
                           <Calendar className="w-4 h-4 text-primary/70" />
@@ -208,12 +219,13 @@ const Events = () => {
                   key={event.title}
                   className="past-event p-6 rounded-2xl bg-muted/50 border border-border hover:border-primary/30 transition-all duration-300 group"
                 >
-                  <h4 className="font-semibold text-sm mb-3 group-hover:text-primary transition-colors">
+                  <h4 className="font-semibold text-sm mb-2 group-hover:text-primary transition-colors">
                     {event.title}
                   </h4>
+                  <p className="text-xs text-accent mb-3">{event.highlight}</p>
                   <div className="flex items-center justify-between text-xs text-muted-foreground">
                     <span>{event.date}</span>
-                    <span className="text-primary font-medium">{event.attendees}+ attendees</span>
+                    <span className="text-primary font-medium">{event.attendees.toLocaleString()}+ attendees</span>
                   </div>
                 </div>
               ))}

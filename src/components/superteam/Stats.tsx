@@ -5,10 +5,12 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { value: 500, suffix: '+', label: 'Community Members' },
-  { value: 25, suffix: '+', label: 'Events Hosted' },
-  { value: 50, suffix: 'K', prefix: '$', label: 'Bounties Paid' },
-  { value: 100, suffix: '+', label: 'Projects Supported' },
+  { value: 20, suffix: 'K+', label: 'Participants Engaged' },
+  { value: 9, suffix: '', label: 'Events in 2024' },
+  { value: 66.5, suffix: 'K+', prefix: '$', label: 'Grants Approved' },
+  { value: 150, suffix: '+', label: 'Teams Coached' },
+  { value: 9, suffix: 'M+', prefix: '$', label: 'Global Community GDP' },
+  { value: 16, suffix: '', label: 'Countries in Network' },
 ];
 
 const AnimatedCounter = ({ target, prefix = '', suffix = '', isVisible }: { target: number; prefix?: string; suffix?: string; isVisible: boolean }) => {
@@ -113,11 +115,14 @@ const Stats = () => {
       }} />
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="stats-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-20">
-          Our <span className="text-primary">Impact</span>
+        <h2 className="stats-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
+          Our <span className="text-primary">Impact</span> on Solana
         </h2>
+        <p className="text-muted-foreground text-center mb-20 max-w-2xl mx-auto text-lg">
+          Numbers that prove our commitment to Brazil's growth in Web3.
+        </p>
 
-        <div className="grid grid-cols-2 lg:grid-cols-4 gap-8 lg:gap-12">
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
           {stats.map((stat, index) => (
             <div 
               key={stat.label} 

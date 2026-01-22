@@ -5,14 +5,14 @@ import { ScrollTrigger } from 'gsap/ScrollTrigger';
 gsap.registerPlugin(ScrollTrigger);
 
 const partners = [
-  { name: 'Solana', logo: '◎' },
+  { name: 'Solana Foundation', logo: '◎' },
+  { name: 'Colosseum', logo: '🏛️' },
+  { name: 'IslandDAO', logo: '🏝️' },
+  { name: 'Jupiter', logo: '🪐' },
+  { name: 'Credit Markets', logo: '💳' },
+  { name: 'Meteora', logo: '☄️' },
   { name: 'Phantom', logo: '👻' },
   { name: 'Magic Eden', logo: '🪄' },
-  { name: 'Jupiter', logo: '🪐' },
-  { name: 'Marinade', logo: '🧂' },
-  { name: 'Raydium', logo: '💧' },
-  { name: 'Orca', logo: '🐋' },
-  { name: 'Drift', logo: '🌊' },
 ];
 
 const Partners = () => {
@@ -76,9 +76,12 @@ const Partners = () => {
       <div className="absolute inset-0 bg-gradient-to-r from-transparent via-primary/3 to-transparent" />
       
       <div className="container mx-auto px-6 relative z-10">
-        <h3 className="partners-title text-center text-muted-foreground text-sm uppercase tracking-[0.2em] mb-12 font-medium">
-          Trusted by the Solana Ecosystem
+        <h3 className="partners-title text-center text-2xl font-bold mb-4 text-foreground">
+          Trusted by <span className="text-primary">Ecosystem Leaders</span>
         </h3>
+        <p className="text-center text-muted-foreground text-sm mb-12 max-w-lg mx-auto">
+          Partnerships that strengthen Solana in Brazil and LATAM
+        </p>
 
         <div className="grid grid-cols-4 md:grid-cols-8 gap-6 md:gap-8 items-center">
           {partners.map((partner, index) => (
