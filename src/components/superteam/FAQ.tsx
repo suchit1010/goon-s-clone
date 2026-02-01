@@ -1,35 +1,46 @@
 import { useEffect, useRef } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import { HelpCircle } from 'lucide-react';
 import {
   Accordion,
   AccordionContent,
   AccordionItem,
   AccordionTrigger,
-} from "@/components/ui/accordion";
+} from '@/components/ui/accordion';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const faqs = [
   {
-    question: "What is Superteam Brazil?",
-    answer: "Superteam Brazil is the Brazilian chapter of Superteam, a global community for Solana builders in Brazil, focused on education, grants, and networking. Launched in 2024, we've already impacted 20,000+ participants and distributed over $66.5K in grants."
+    icon: '🚀',
+    question: 'How do I become a Superteam Brazil member?',
+    answer: 'Join our Telegram community and start participating! We welcome builders, creators, designers, and anyone passionate about Solana. Active contributors are often invited to join our core initiatives.',
   },
   {
-    question: "How do I become a member?",
-    answer: "Apply via bounties on Superteam Earn or join our events—membership is by invite for top talents who demonstrate skills and commitment. Start by joining our Telegram community to engage with other members."
+    icon: '💰',
+    question: 'What opportunities are available through Superteam?',
+    answer: 'We offer grants up to $10K through Superteam Earn, bounty opportunities, hackathon coaching, job placements, and access to exclusive events across Brazil and internationally.',
   },
   {
-    question: "What opportunities are available?",
-    answer: "Grants up to $10K from the Solana Foundation, bounties, freelance jobs, and hackathon coaching. We connect Brazilian talent to global Solana projects through our platform."
+    icon: '🏆',
+    question: 'Do I need experience in Web3 to participate?',
+    answer: 'Not at all! We welcome everyone from complete beginners to Web3 experts. We provide education, workshops, and mentorship to help you grow in the Solana ecosystem.',
   },
   {
-    question: "How can projects partner with us?",
-    answer: "Contact us via Telegram for event or grant partnerships. Projects can access top Brazilian talent, host events, sponsor hackathons, or post bounties through our network."
+    icon: '🇧🇷',
+    question: 'Are events only held in major cities?',
+    answer: 'We reach across Brazil! Our 2024 roadshow covered 8,000+ km, bringing Solana education to cities nationwide. We also host online events accessible from anywhere.',
   },
   {
-    question: "Do I need to be a developer to join?",
-    answer: "No! Designers, marketers, content creators, community managers, and founders are all welcome. The Solana ecosystem needs diverse skills to grow, and we value all contributions."
+    icon: '🤝',
+    question: 'How can my project partner with Superteam Brazil?',
+    answer: 'Reach out through our Telegram or Twitter! We collaborate with projects for events, hackathons, educational content, and ecosystem growth initiatives.',
+  },
+  {
+    icon: '🎯',
+    question: 'What makes Superteam Brazil different from other communities?',
+    answer: 'We combine global Superteam network resources with deep local Brazilian market knowledge, offering both international opportunities and cultural relevance for Latin American builders.',
   },
 ];
 
@@ -40,10 +51,11 @@ const FAQ = () => {
     const ctx = gsap.context(() => {
       // Title animation
       gsap.fromTo('.faq-title', 
-        { y: 80, opacity: 0 },
+        { y: 60, opacity: 0, scale: 0.95 },
         { 
           y: 0, 
           opacity: 1, 
+          scale: 1,
           duration: 1, 
           ease: "power3.out",
           scrollTrigger: {
@@ -72,15 +84,6 @@ const FAQ = () => {
         );
       });
 
-      // Hover animation for FAQ items
-      gsap.utils.toArray('.faq-item').forEach((item: any) => {
-        item.addEventListener('mouseenter', () => {
-          gsap.to(item, { x: 10, duration: 0.3, ease: "power2.out" });
-        });
-        item.addEventListener('mouseleave', () => {
-          gsap.to(item, { x: 0, duration: 0.3, ease: "power2.out" });
-        });
-      });
     }, sectionRef);
 
     return () => ctx.revert();
@@ -88,33 +91,68 @@ const FAQ = () => {
 
   return (
     <section ref={sectionRef} id="faq" className="py-28 lg:py-40 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute top-1/2 right-0 w-[500px] h-[500px] bg-primary/3 rounded-full blur-3xl -translate-y-1/2" />
+      {/* Background decorations */}
+      <div className="absolute top-20 right-20 w-72 h-72 bg-yellow-500/3 rounded-full blur-3xl" />
+      <div className="absolute bottom-20 left-20 w-96 h-96 bg-purple-500/3 rounded-full blur-3xl" />
       
-      <div className="container mx-auto px-6 max-w-3xl relative z-10">
-        <h2 className="faq-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
-          Frequently Asked <span className="text-primary">Questions</span>
-        </h2>
-        <p className="text-muted-foreground text-center mb-16 max-w-xl mx-auto">
-          Everything you need to know to get started with Superteam Brazil.
-        </p>
+      <div className="container mx-auto px-6 relative z-10">
+        <div className="text-center mb-16">
+          <div className="faq-title">
+            <div className="inline-flex items-center justify-center w-16 h-16 rounded-2xl bg-yellow-500/10 mb-6">
+              <HelpCircle className="w-8 h-8 text-yellow-500" />
+            </div>
+            <h2 className="text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+              Frequently Asked <span className="text-yellow-500">Questions</span>
+            </h2>
+            <p className="text-muted-foreground text-lg md:text-xl max-w-2xl mx-auto">
+              Everything you need to know about joining Superteam Brazil
+            </p>
+          </div>
+        </div>
 
-        <Accordion type="single" collapsible className="space-y-4">
-          {faqs.map((faq, index) => (
-            <AccordionItem 
-              key={index} 
-              value={`item-${index}`}
-              className="faq-item bg-card border border-border rounded-2xl px-6 lg:px-8 data-[state=open]:border-primary/50 transition-all duration-300 hover:shadow-lg"
-            >
-              <AccordionTrigger className="text-left text-lg lg:text-xl font-semibold hover:text-primary transition-colors py-6 hover:no-underline">
-                {faq.question}
-              </AccordionTrigger>
-              <AccordionContent className="text-muted-foreground pb-6 text-base lg:text-lg leading-relaxed">
-                {faq.answer}
-              </AccordionContent>
-            </AccordionItem>
-          ))}
-        </Accordion>
+        <div className="max-w-4xl mx-auto">
+          <Accordion type="single" collapsible className="space-y-4">
+            {faqs.map((faq, index) => (
+              <AccordionItem 
+                key={index} 
+                value={`item-${index}`} 
+                className="faq-item bg-card border border-border rounded-2xl px-6 py-4 hover:border-yellow-500/30 transition-all duration-300 hover:shadow-lg hover:shadow-yellow-500/5"
+              >
+                <AccordionTrigger className="text-left hover:no-underline group text-lg font-semibold py-6">
+                  <div className="flex items-center gap-4">
+                    <div className="w-10 h-10 rounded-xl bg-yellow-500/10 flex items-center justify-center text-lg group-hover:bg-yellow-500/20 transition-colors duration-300">
+                      {faq.icon}
+                    </div>
+                    <span className="group-hover:text-yellow-500 transition-colors duration-300">
+                      {faq.question}
+                    </span>
+                  </div>
+                </AccordionTrigger>
+                <AccordionContent className="pt-2 pb-6 pl-14">
+                  <p className="text-muted-foreground leading-relaxed">
+                    {faq.answer}
+                  </p>
+                </AccordionContent>
+              </AccordionItem>
+            ))}
+          </Accordion>
+        </div>
+
+        {/* CTA */}
+        <div className="text-center mt-16">
+          <p className="text-muted-foreground text-lg mb-6">
+            Still have questions?
+          </p>
+          <a 
+            href="https://t.me/superteambr" 
+            target="_blank" 
+            rel="noopener noreferrer"
+            className="inline-flex items-center gap-3 px-8 py-4 bg-yellow-500 hover:bg-yellow-400 text-black font-bold rounded-full transition-all duration-300 hover:scale-105 hover:shadow-xl hover:shadow-yellow-500/30"
+          >
+            Ask in Telegram
+            <span className="text-lg">📱</span>
+          </a>
+        </div>
       </div>
     </section>
   );

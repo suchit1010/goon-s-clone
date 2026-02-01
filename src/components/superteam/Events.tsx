@@ -10,18 +10,24 @@ const upcomingEvents = [
   {
     title: 'Privacy Hackathon',
     date: 'Jan 2026',
+    deadline: '5 days left',
     location: 'Online + In-Person',
     type: 'Hackathon',
     description: 'Powered by Solana, $2M+ in prizes with partners.',
     cta: 'Register Now',
+    urgent: true,
+    prizes: '$2M+',
   },
   {
     title: 'Solana Summer Brazil',
     date: 'Feb 2026',
+    deadline: 'Early Bird Closes Soon',
     location: 'São Paulo, SP',
     type: 'Event Series',
     description: 'In-person/online events leading up to Carnival.',
-    cta: 'See Details',
+    cta: 'Reserve Your Spot',
+    urgent: false,
+    prizes: null,
   },
 ];
 
@@ -30,25 +36,33 @@ const pastEvents = [
     title: '2024 Roadshow',
     date: '2024',
     attendees: 20000,
-    highlight: '8,000km, 9 events across Brazil',
+    highlight: '8,000km traveled, 9 cities',
+    testimonial: '"Best Web3 tour in LATAM history"',
+    image: true,
   },
   {
     title: 'Greece Bootcamp',
     date: '2024',
     attendees: 150,
-    highlight: 'with IslandDAO',
+    highlight: 'Built 12 MVPs in 5 days',
+    testimonial: '"Life-changing experience"',
+    image: true,
   },
   {
     title: 'Solana Hotel Buenos Aires',
     date: '2024',
     attendees: 200,
-    highlight: 'LATAM Summit',
+    highlight: 'LATAM\'s biggest Solana event',
+    testimonial: '"Unmatched networking"',
+    image: true,
   },
   {
     title: 'Breakpoint UAE',
     date: '2024',
     attendees: 300,
-    highlight: 'Brazilian records broken',
+    highlight: 'Brazil had largest delegation',
+    testimonial: '"Proud moment for Brazil"',
+    image: true,
   },
 ];
 
@@ -130,11 +144,14 @@ const Events = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} id="events" className="py-28 lg:py-40 relative overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-gradient-to-b from-transparent via-primary/3 to-transparent" />
-      <div className="absolute top-0 right-0 w-[500px] h-[500px] bg-primary/5 rounded-full blur-3xl" />
-      
+    <sectiodiv className="inline-flex items-center gap-2 px-4 py-2 bg-primary/10 border border-primary/20 rounded-full mb-6">
+            <span className="text-sm font-medium text-primary">🎪 Where Builders Meet Opportunities</span>
+          </div>
+          <h2 className="events-title text-4xl md:text-5xl lg:text-6xl font-bold mb-6">
+            Events That <span className="text-primary">Launch</span> Careers
+          </h2>
+          <p className="text-muted-foreground max-w-2xl mx-auto text-lg">
+            From hackathons with <span className="text-foreground font-semibold">$2M+ in prizes</span> to intimate builder workshops—every event is designed to accelerate
       <div className="container mx-auto px-6 relative z-10">
         {/* Header */}
         <div className="text-center mb-16">
@@ -161,14 +178,33 @@ const Events = () => {
               {upcomingEvents.map((event) => (
                 <div 
                   key={event.title}
-                  className="event-card p-6 lg:p-8 rounded-3xl bg-card border border-border hover:border-primary/50 transition-all duration-500 group cursor-pointer hover:shadow-xl hover:shadow-primary/5"
+                  className={`event-card p-6 lg:p-8 rounded-3xl bg-card border transition-all duration-500 group cursor-pointer hover:shadow-xl ${
+                    event.urgent 
+                      ? 'border-yellow-500/50 bg-yellow-500/5 hover:border-yellow-500' 
+                      : 'border-border hover:border-primary/50 hover:shadow-primary/5'
+                  }`}
                   style={{ transformStyle: 'preserve-3d' }}
                 >
+                  {event.urgent && (
+                    <div className="flex items-center gap-2 mb-3">
+                      <div className="flex items-center gap-1.5 px-3 py-1 bg-red-500/10 border border-red-500/30 rounded-full">
+                        <div className="w-2 h-2 bg-red-500 rounded-full animate-pulse" />
+                        <span className="text-xs font-bold text-red-600 dark:text-red-400">{event.deadline}</span>
+                      </div>
+                    </div>
+                  )}
                   <div className="flex items-start justify-between gap-4">
                     <div className="flex-1">
-                      <span className="inline-block text-xs font-semibold text-primary uppercase tracking-wider bg-primary/10 px-3 py-1 rounded-full mb-3">
-                        {event.type}
-                      </span>
+                      <div className="flex items-center gap-2 mb-3">
+                        <span className="inline-block text-xs font-semibold text-primary uppercase tracking-wider bg-primary/10 px-3 py-1 rounded-full">
+                          {event.type}
+                        </span>
+                        {event.prizes && (
+                          <span className="inline-block text-xs font-bold text-yellow-600 dark:text-yellow-400 bg-yellow-500/10 px-3 py-1 rounded-full">
+                            💰 {event.prizes} Prizes
+                          </span>
+                        )}
+                      </div>
                       <h4 className="text-xl font-bold group-hover:text-primary transition-colors duration-300">
                         {event.title}
                       </h4>
@@ -185,7 +221,7 @@ const Events = () => {
                       </div>
                     </div>
                     <div className="shrink-0">
-                      <Button size="sm" className="group-hover:bg-primary transition-colors">
+                      <Button size="sm" className={`transition-colors ${event.urgent ? 'bg-yellow-500 hover:bg-yellow-600 text-black' : 'group-hover:bg-primary'}`}>
                         {event.cta}
                         <ArrowRight className="w-4 h-4 ml-2 group-hover:translate-x-1 transition-transform" />
                       </Button>
@@ -259,43 +295,67 @@ const Events = () => {
           </div>
         </div>
 
-        {/* Past Events Gallery */}
+        {/* Past Events Gallery with Social Proof */}
         <div>
           <h3 className="text-2xl font-bold mb-8 flex items-center gap-3">
-            <div className="w-10 h-10 rounded-xl bg-muted flex items-center justify-center">
-              <Users className="w-5 h-5 text-muted-foreground" />
+            <div className="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center">
+              <Users className="w-5 h-5 text-primary" />
             </div>
-            Past Events & Highlights
+            2024 Impact: 20,000+ Builders Reached
           </h3>
           
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
             {pastEvents.map((event) => (
               <div 
                 key={event.title}
-                className="past-event p-5 rounded-2xl bg-card border border-border hover:border-primary/30 transition-all duration-300 group"
+                className="past-event p-6 rounded-2xl bg-gradient-to-br from-card to-muted/20 border border-border hover:border-primary/50 transition-all duration-300 group cursor-pointer hover:scale-[1.02] hover:shadow-lg"
               >
-                <h4 className="font-bold text-sm mb-2 group-hover:text-primary transition-colors">
+                <div className="flex items-start justify-between mb-3">
+                  <span className="text-xs font-semibold text-primary/70 uppercase tracking-wider bg-primary/5 px-2 py-1 rounded">
+                    {event.date}
+                  </span>
+                  <span className="text-xl">✨</span>
+                </div>
+                <h4 className="font-bold text-base mb-2 group-hover:text-primary transition-colors">
                   {event.title}
                 </h4>
-                <p className="text-xs text-accent mb-3 line-clamp-2">{event.highlight}</p>
-                <div className="flex items-center justify-between text-xs text-muted-foreground">
-                  <span>{event.date}</span>
-                  <span className="text-primary font-semibold">{event.attendees.toLocaleString()}+</span>
+                <p className="text-xs text-muted-foreground mb-3">{event.highlight}</p>
+                {event.testimonial && (
+                  <p className="text-xs italic text-primary/80 mb-3 border-l-2 border-primary/30 pl-2">
+                    {event.testimonial}
+                  </p>
+                )}
+                <div className="flex items-center justify-between text-xs pt-3 border-t border-border/50">
+                  <span className="text-muted-foreground">Attendees</span>
+                  <span className="text-primary font-bold text-sm">{event.attendees.toLocaleString()}+</span>
                 </div>
               </div>
             ))}
           </div>
 
-          {/* Past Events CTA */}
-          <div className="mt-8 text-center">
-            <a 
-              href="https://lu.ma/Superteambrasil?period=past" 
-              target="_blank" 
-              rel="noopener noreferrer"
-              className="inline-flex items-center gap-2 text-primary font-semibold hover:gap-3 transition-all duration-300"
-            >
-              View All Past Events <ArrowRight className="w-4 h-4" />
-            </a>
+          {/* Social Proof Banner */}
+          <div className="mt-12 p-8 rounded-3xl bg-gradient-to-r from-primary/10 via-yellow-500/10 to-green-500/10 border border-primary/20">
+            <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+              <div className="text-center md:text-left">
+                <h4 className="text-2xl font-bold mb-2">
+                  Don't Miss the Next One 🚀
+                </h4>
+                <p className="text-muted-foreground">
+                  Join 20K+ builders who've accelerated their careers through our events
+                </p>
+              </div>
+              <a 
+                href="https://lu.ma/Superteambrasil" 
+                target="_blank" 
+                rel="noopener noreferrer"
+              >
+                <Button size="lg" className="gap-2 bg-primary hover:bg-primary/90">
+                  <Calendar className="w-4 h-4" />
+                  See All Events
+                  <ArrowRight className="w-4 h-4" />
+                </Button>
+              </a>
+            </div>
           </div>
         </div>
       </div>

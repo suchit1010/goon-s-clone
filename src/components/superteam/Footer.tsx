@@ -20,8 +20,15 @@ const Footer = () => {
   ];
 
   return (
-    <footer className="py-16 border-t border-border bg-background">
-      <div className="container mx-auto px-6">
+    <footer className="relative py-16 border-t border-border bg-background overflow-hidden">
+      {/* Large Watermark Text */}
+      <div className="absolute inset-0 flex items-center justify-center pointer-events-none select-none">
+        <h2 className="text-[12rem] md:text-[20rem] lg:text-[20rem] font-bold text-white/[0.01] whitespace-nowrap leading-none">
+          superteam
+        </h2>
+      </div>
+
+      <div className="container mx-auto px-6 relative z-10">
         <div className="grid md:grid-cols-4 gap-12 mb-12">
           {/* Logo & Description */}
           <div className="md:col-span-2">

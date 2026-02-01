@@ -7,7 +7,9 @@ import Hero from '@/components/superteam/Hero';
 import Mission from '@/components/superteam/Mission';
 import Stats from '@/components/superteam/Stats';
 import Events from '@/components/superteam/Events';
-import Members from '@/components/superteam/Members';
+import MembersClean from '@/components/superteam/MembersClean';
+import LiveActivity from '@/components/superteam/LiveActivity';
+import Tweets from '@/components/superteam/Tweets';
 import Partners from '@/components/superteam/Partners';
 import FAQ from '@/components/superteam/FAQ';
 import JoinCTA from '@/components/superteam/JoinCTA';
@@ -39,7 +41,9 @@ const Index = () => {
         <Mission />
         <Stats />
         <Events />
-        <Members />
+        <MembersClean />
+        <LiveActivity />
+        <Tweets />
         <Partners />
         <FAQ />
         <JoinCTA />

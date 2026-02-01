@@ -1,16 +1,17 @@
 import { useEffect, useRef, useState } from 'react';
 import gsap from 'gsap';
 import { ScrollTrigger } from 'gsap/ScrollTrigger';
+import toucanBg from '../../assets/a1.png';
 
 gsap.registerPlugin(ScrollTrigger);
 
 const stats = [
-  { value: 20, suffix: 'K+', label: 'Participants Engaged' },
-  { value: 9, suffix: '', label: 'Events in 2024' },
-  { value: 66.5, suffix: 'K+', prefix: '$', label: 'Grants Approved' },
-  { value: 150, suffix: '+', label: 'Teams Coached' },
-  { value: 9, suffix: 'M+', prefix: '$', label: 'Global Community GDP' },
-  { value: 16, suffix: '', label: 'Countries in Network' },
+  { value: 66.5, suffix: 'K+', prefix: '$', label: 'Grants Deployed', subtext: 'Directly to builders' },
+  { value: 150, suffix: '+', label: 'Teams Funded', subtext: 'Building on Solana' },
+  { value: 20, suffix: 'K+', label: 'Active Builders', subtext: 'Across Brazil' },
+  { value: 9, suffix: '', label: 'Major Events', subtext: 'Hosted in 2024' },
+  { value: 9, suffix: 'M+', prefix: '$', label: 'Community GDP', subtext: 'Value created' },
+  { value: 16, suffix: '+', label: 'Countries', subtext: 'In our network' },
 ];
 
 const AnimatedCounter = ({ target, prefix = '', suffix = '', isVisible }: { target: number; prefix?: string; suffix?: string; isVisible: boolean }) => {
@@ -103,33 +104,35 @@ const Stats = () => {
   }, []);
 
   return (
-    <section ref={sectionRef} className="py-28 lg:py-40 bg-secondary relative overflow-hidden">
-      {/* Background decorations with parallax */}
-      <div className="stats-bg-shape absolute -top-20 right-0 w-[600px] h-[600px] bg-primary/5 rounded-full blur-3xl" />
-      <div className="stats-bg-shape absolute -bottom-40 left-0 w-[500px] h-[500px] bg-accent/5 rounded-full blur-3xl" />
+    <section ref={sectionRef} className="py-28 lg:py-40 relative overflow-hidden">
+      {/* Background image - no overlay */}
+      <div 
+        className="absolute inset-0 bg-cover bg-center bg-no-repeat"
+        style={{ backgroundImage: `url(${toucanBg})` }}
+      />
       
       {/* Subtle grid pattern */}
       <div className="absolute inset-0 opacity-5" style={{
-        backgroundImage: `linear-gradient(hsl(var(--primary)) 1px, transparent 1px), linear-gradient(90deg, hsl(var(--primary)) 1px, transparent 1px)`,
+        backgroundImage: `linear-gradient(rgb(234 179 8) 1px, transparent 1px), linear-gradient(90deg, rgb(234 179 8) 1px, transparent 1px)`,
         backgroundSize: '60px 60px'
       }} />
       
       <div className="container mx-auto px-6 relative z-10">
-        <h2 className="stats-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6">
-          Our <span className="text-primary">Impact</span> on Solana
+        <h2 className="stats-title text-4xl md:text-5xl lg:text-6xl font-bold text-center mb-6 text-white">
+          Real <span className="text-yellow-500">Impact,</span> Real <span className="text-yellow-500">Numbers</span>
         </h2>
-        <p className="text-muted-foreground text-center mb-20 max-w-2xl mx-auto text-lg">
-          Numbers that prove our commitment to Brazil's growth in Web3.
+        <p className="text-white/80 text-center mb-4 max-w-2xl mx-auto text-lg">
+          We don't just talk about building—we fund it, coach it, and celebrate it.
         </p>
-
-        <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
-          {stats.map((stat, index) => (
-            <div 
-              key={stat.label} 
-              className="stat-item text-center group"
+        <div className="flex justify-center items-center gap-2 mb-20">
+          <span className="inline-flex items-center gap-2 px-4 py-2 bg-green-500/20 border border-green-500/30 rounded-full text-green-300 text-sm font-medium">
+            <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
+            Updated weekly with new grants
+          </span>
+        </div> backdrop-blur-sm bg-black/20 p-6 rounded-2xl border border-white/10 hover:border-yellow-500/50 transition-all duration-300"
             >
               <div className="relative">
-                <div className="text-5xl md:text-6xl lg:text-7xl font-bold text-primary mb-4 transition-transform duration-300 group-hover:scale-110">
+                <div className="text-5xl md:text-6xl lg:text-7xl font-bold text-yellow-500 mb-3 transition-transform duration-300 group-hover:scale-110">
                   <AnimatedCounter 
                     target={stat.value} 
                     prefix={stat.prefix} 
@@ -138,7 +141,16 @@ const Stats = () => {
                   />
                 </div>
                 {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-primary/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+                <div className="absolute inset-0 bg-yellow-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
+              </div>
+              <p className="text-white text-base md:text-lg lg:text-xl font-semibold mb-1">
+                {stat.label}
+              </p>
+              <p className="text-white/60 text-xs md:text-sm">
+                {stat.subtext
+                </div>
+                {/* Glow effect on hover */}
+                <div className="absolute inset-0 bg-yellow-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
               </div>
               <p className="text-muted-foreground text-sm md:text-base lg:text-lg font-medium">
                 {stat.label}
