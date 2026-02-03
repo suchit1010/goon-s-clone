@@ -196,72 +196,58 @@ const Hero = () => {
               ref={titleRef}
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-[1.05] tracking-tight"
             >
-              <span className="text-foreground">From </span>
+              <span className="text-foreground">Building Solana's</span>
+              <br />
+              <span className="text-foreground">Future in </span>
               <span className="text-primary relative">
-                Zero
+                Brazil
                 <svg className="absolute -bottom-2 left-0 w-full" viewBox="0 0 200 12" fill="none">
                   <path d="M2 8 Q50 2 100 6 T198 4" stroke="hsl(var(--primary))" strokeWidth="3" strokeLinecap="round" className="opacity-50"/>
                 </svg>
               </span>
-              <span className="text-foreground"> to </span>
-              <span className="text-yellow-500">Funded</span>
-              <br />
-              <span className="text-muted-foreground text-5xl lg:text-6xl">in Brazil's #1 Web3 Hub</span>
             </h1>
             
             <p 
               ref={subtitleRef}
               className="text-lg md:text-xl text-muted-foreground max-w-xl leading-relaxed"
             >
-              <span className="text-foreground font-semibold">$66.5K+ deployed.</span> 150+ teams coached. 20,000+ builders connected. Join Superteam Brazil and turn your Solana project into a funded reality.
+              Join the leading community of builders, founders, and investors in Latin America's largest Web3 ecosystem. Learn, build, and earn with Superteam Brazil.
             </p>
-            
-            {/* Social proof badges */}
-            <div className="flex flex-wrap items-center gap-3 text-sm">
-              <div className="flex items-center gap-1.5 px-3 py-1.5 bg-green-500/10 border border-green-500/20 rounded-full">
-                <div className="w-2 h-2 bg-green-500 rounded-full animate-pulse" />
-                <span className="text-green-600 dark:text-green-400 font-medium">3 grants approved this week</span>
-              </div>
-              <div className="flex items-center gap-1 text-muted-foreground">
-                <span className="text-lg">🔥</span>
-                <span>Next hackathon: Jan 2026</span>
-              </div>
-            </div>
 
             {/* CTAs */}
             <div ref={ctaRef} className="flex flex-col sm:flex-row gap-4 pt-4">
               <a 
-                href="https://earn.superteam.fun" 
+                href="https://t.me/superteambr" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-2 px-8 py-4 bg-primary text-primary-foreground font-semibold rounded-full hover:bg-primary/90 transition-all duration-300 hover:scale-[1.02] hover:shadow-xl hover:shadow-primary/20"
               >
-                Browse Open Bounties
+                Join the Community
                 <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
               </a>
               <a 
-                href="https://t.me/superteambr" 
+                href="https://earn.superteam.fun" 
                 target="_blank" 
                 rel="noopener noreferrer"
                 className="inline-flex items-center justify-center gap-2 px-8 py-4 border-2 border-border text-foreground font-semibold rounded-full hover:border-primary hover:text-primary transition-all duration-300"
               >
-                Join Telegram
+                Explore Opportunities
               </a>
             </div>
 
-            {/* Quick stats with better context */}
+            {/* Quick stats */}
             <div className="flex flex-wrap gap-8 pt-8 border-t border-border/50">
               <div className="hero-stat">
-                <div className="text-3xl font-bold text-primary">$66.5K+</div>
-                <div className="text-sm text-muted-foreground">Deployed in Grants</div>
+                <div className="text-3xl font-bold text-primary">20K+</div>
+                <div className="text-sm text-muted-foreground">Participants Engaged</div>
               </div>
               <div className="hero-stat">
-                <div className="text-3xl font-bold text-yellow-500">150+</div>
-                <div className="text-sm text-muted-foreground">Teams Funded</div>
+                <div className="text-3xl font-bold text-accent">$66.5K+</div>
+                <div className="text-sm text-muted-foreground">Grants Approved</div>
               </div>
               <div className="hero-stat">
-                <div className="text-3xl font-bold text-green-500">20K+</div>
-                <div className="text-sm text-muted-foreground">Active Members</div>
+                <div className="text-3xl font-bold text-secondary">9</div>
+                <div className="text-sm text-muted-foreground">Events in 2024</div>
               </div>
             </div>
           </div>

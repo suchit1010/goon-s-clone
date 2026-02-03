@@ -129,7 +129,13 @@ const Stats = () => {
             <div className="w-2 h-2 bg-green-400 rounded-full animate-pulse" />
             Updated weekly with new grants
           </span>
-        </div> backdrop-blur-sm bg-black/20 p-6 rounded-2xl border border-white/10 hover:border-yellow-500/50 transition-all duration-300"
+        </div>
+
+        <div className="grid grid-cols-2 lg:grid-cols-3 gap-8 lg:gap-12">
+          {stats.map((stat, index) => (
+            <div 
+              key={stat.label} 
+              className="stat-item text-center group backdrop-blur-sm bg-black/20 p-6 rounded-2xl border border-white/10 hover:border-yellow-500/50 transition-all duration-300"
             >
               <div className="relative">
                 <div className="text-5xl md:text-6xl lg:text-7xl font-bold text-yellow-500 mb-3 transition-transform duration-300 group-hover:scale-110">
@@ -147,13 +153,7 @@ const Stats = () => {
                 {stat.label}
               </p>
               <p className="text-white/60 text-xs md:text-sm">
-                {stat.subtext
-                </div>
-                {/* Glow effect on hover */}
-                <div className="absolute inset-0 bg-yellow-500/20 blur-3xl opacity-0 group-hover:opacity-100 transition-opacity duration-500 rounded-full" />
-              </div>
-              <p className="text-muted-foreground text-sm md:text-base lg:text-lg font-medium">
-                {stat.label}
+                {stat.subtext}
               </p>
             </div>
           ))}

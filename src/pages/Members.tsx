@@ -4,6 +4,7 @@ import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Search, X, Users } from "lucide-react";
 import Header from "@/components/superteam/Header";
 import Footer from "@/components/superteam/Footer";
+import membersBg from "@/assets/member.png";
 
 gsap.registerPlugin(ScrollTrigger);
 
@@ -301,77 +302,77 @@ const Members = () => {
                 href={`https://x.com/${member.handle.replace('@', '')}`}
                 target="_blank"
                 rel="noopener noreferrer"
-                className={`member-card group relative overflow-hidden rounded-3xl p-6 transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1 ${
-                  member.isCore 
-                    ? "bg-gradient-to-br from-superteam-green/30 via-superteam-dark-green/50 to-superteam-yellow/10 border-2 border-superteam-green/40" 
-                    : "bg-superteam-dark-green/40 border border-superteam-green/20 hover:border-superteam-green/40"
-                }`}
+                className="member-card group relative overflow-hidden rounded-3xl transition-all duration-500 hover:scale-[1.02] hover:-translate-y-1"
               >
-                {/* Core Team Badge */}
-                {member.isCore && (
-                  <div className="absolute top-4 right-4 px-3 py-1 rounded-full bg-superteam-yellow text-superteam-dark text-xs font-bold">
-                    Core Team
-                  </div>
-                )}
-
-                {/* Decorative shapes for core team */}
-                {member.isCore && (
-                  <>
-                    <div className="absolute -top-10 -right-10 w-32 h-32 rounded-full bg-superteam-yellow/10 blur-2xl" />
-                    <div className="absolute -bottom-10 -left-10 w-24 h-24 rounded-full bg-superteam-green/20 blur-xl" />
-                  </>
-                )}
-
-                <div className="relative z-10 flex items-start gap-4">
-                  {/* Avatar */}
-                  <div className={`relative flex-shrink-0 w-20 h-20 rounded-2xl overflow-hidden border-2 transition-all duration-300 group-hover:scale-105 ${
-                    member.isCore ? "border-superteam-yellow" : "border-superteam-green/30 group-hover:border-superteam-green"
-                  }`}>
-                    <img 
-                      src={member.avatar} 
-                      alt={member.name}
-                      className="w-full h-full object-cover"
-                    />
-                    {/* Hover overlay */}
-                    <div className="absolute inset-0 bg-superteam-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
-                  </div>
-
-                  {/* Info */}
-                  <div className="flex-1 min-w-0">
-                    <h3 className={`font-clash font-bold text-lg truncate transition-colors duration-300 ${
-                      member.isCore ? "text-superteam-yellow" : "text-superteam-beige group-hover:text-superteam-yellow"
-                    }`}>
-                      {member.name}
-                    </h3>
-                    <p className="text-superteam-green text-sm font-medium">{member.handle}</p>
-                    <p className="text-superteam-beige/60 text-sm mt-1">{member.role}</p>
-                    <p className="text-superteam-beige/40 text-xs">{member.company}</p>
-                  </div>
+                {/* Background Image */}
+                <div className="absolute inset-0 z-0">
+                  <img src={membersBg} alt="" className="w-full h-full object-cover" />
                 </div>
+                
+                {/* Dark overlay for better text readability */}
+                <div className="absolute inset-0 bg-black/40 z-0" />
+                
+                {/* Content wrapper */}
+                <div className="relative z-10 p-6">
+                  {/* Core Team Badge */}
+                  {member.isCore && (
+                    <div className="absolute top-0 right-0 px-3 py-1 rounded-full bg-superteam-yellow text-superteam-dark text-xs font-bold">
+                      Core Team
+                    </div>
+                  )}
 
-                {/* Background */}
-                <p className="relative z-10 mt-4 text-superteam-beige/50 text-sm line-clamp-2">
-                  {member.background}
-                </p>
 
-                {/* Skills */}
-                <div className="relative z-10 flex flex-wrap gap-2 mt-4">
-                  {member.skills.map((skill) => (
-                    <span 
-                      key={skill}
-                      className={`px-2 py-1 rounded-full text-xs font-medium ${
-                        skill === "Core Team"
-                          ? "bg-superteam-yellow/20 text-superteam-yellow"
-                          : "bg-superteam-green/10 text-superteam-green/80"
-                      }`}
-                    >
-                      {skill}
-                    </span>
-                  ))}
+                  <div className="flex items-start gap-4">
+                    {/* Avatar */}
+                    <div className={`relative flex-shrink-0 w-20 h-20 rounded-full overflow-hidden border-2 transition-all duration-300 group-hover:scale-105 ${
+                      member.isCore ? "border-superteam-yellow" : "border-white/50 group-hover:border-white"
+                    }`}>
+                      <img 
+                        src={member.avatar} 
+                        alt={member.name}
+                        className="w-full h-full object-cover"
+                      />
+                      {/* Hover overlay */}
+                      <div className="absolute inset-0 bg-superteam-green/20 opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
+                    </div>
+
+                    {/* Info */}
+                    <div className="flex-1 min-w-0">
+                      <h3 className={`font-clash font-bold text-lg truncate transition-colors duration-300 ${
+                        member.isCore ? "text-white" : "text-white group-hover:text-superteam-yellow"
+                      }`}>
+                        {member.name}
+                      </h3>
+                      <p className="text-white/80 text-sm font-medium">{member.handle}</p>
+                      <p className="text-white/70 text-sm mt-1">{member.role}</p>
+                      <p className="text-white/60 text-xs">{member.company}</p>
+                    </div>
+                  </div>
+
+                  {/* Background */}
+                  <p className="mt-4 text-white/70 text-sm line-clamp-2">
+                    {member.background}
+                  </p>
+
+                  {/* Skills */}
+                  <div className="flex flex-wrap gap-2 mt-4">
+                    {member.skills.map((skill) => (
+                      <span 
+                        key={skill}
+                        className={`px-2 py-1 rounded-full text-xs font-medium ${
+                          skill === "Core Team"
+                            ? "bg-superteam-yellow text-superteam-dark"
+                            : "bg-white/20 text-white backdrop-blur-sm"
+                        }`}
+                      >
+                        {skill}
+                      </span>
+                    ))}
+                  </div>
                 </div>
 
                 {/* Hover CTA */}
-                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-superteam-dark via-superteam-dark/80 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300">
+                <div className="absolute bottom-0 left-0 right-0 p-4 bg-gradient-to-t from-black/90 via-black/70 to-transparent translate-y-full group-hover:translate-y-0 transition-transform duration-300 z-20">
                   <span className="flex items-center justify-center gap-2 text-superteam-yellow text-sm font-medium">
                     <svg className="w-4 h-4" viewBox="0 0 24 24" fill="currentColor">
                       <path d="M18.244 2.25h3.308l-7.227 8.26 8.502 11.24H16.17l-5.214-6.817L4.99 21.75H1.68l7.73-8.835L1.254 2.25H8.08l4.713 6.231zm-1.161 17.52h1.833L7.084 4.126H5.117z"/>
